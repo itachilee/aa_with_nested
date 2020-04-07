@@ -1,8 +1,7 @@
 ActiveAdmin.register Survey do
 
   scope :all
-  scope :recent
-  scope :older
+
   permit_params :name, questions_attributes: [:content, :_destroy]
 
 

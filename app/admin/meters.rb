@@ -1,19 +1,31 @@
 ActiveAdmin.register Meter do
+  menu parent: 'device'
+  scope :all
+  scope :older
+  scope :recent
+  permit_params :name, :no,:gpr_id, water_attributes: [:name,:no]
+  action_item :view, only: :index do
+    link_to 'View on site', "#"
+  end
 
-  # See permitted parameters documentation:
-  # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-  #
-  # Uncomment all parameters which should be permitted for assignment
-  #
-  permit_params :name, :no,:gpr_id,water_attributes: [:name,:no]
-  #
-  # or
-  #
-  # permit_params do
-  #   permitted = [:name, :no]
-  #   permitted << :other if params[:action] == 'create' && current_user.admin?
-  #   permitted
-  # end
+  index do
+    selectable_column
+    column :name
+    column :no
+    column :gpr_id  do|t|
+      link_to t.gpr.name,admin_gpr_path(t.gpr_id) if t&.gpr_id.present?
+    end
+    column "waters" do |t|
+      link_to t.water.no,admin_water_path(t.water.id) if t.water.present?
+    end
+    column "cutomers" do |t|
+      t.customers.map{|c| link_to c.name ,admin_customer_path(c.id)}
+    end
+    column "collector" do|t|
+      Collector.find(t.gpr_id ) if t&.gpr_id
+    end
+    actions
+  end
   form do|f|
     f.inputs do
       f.input :name
@@ -29,4 +41,7 @@ ActiveAdmin.register Meter do
     end
     f.actions
   end
+
+
+
 end
