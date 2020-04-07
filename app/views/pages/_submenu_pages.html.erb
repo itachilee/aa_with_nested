@@ -1,0 +1,8 @@
+<ul class="nav nav-tabs">
+  <% pages.each do |page,children| %>
+    <li class="nav-item">
+      <%= link_to_unless_current page.name, page, class: 'nav-link' %>
+      <%= render 'submenu_pages', pages: children if children.present? %>
+    </li>
+  <% end %>
+</ul>

@@ -1,0 +1,2 @@
+class Surver < ApplicationRecord
+end

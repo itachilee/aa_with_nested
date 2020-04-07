@@ -1,0 +1,2 @@
+      invoke  active_record
+      create    db/migrate/20200406155833_add_column_depth_to_page.rb
