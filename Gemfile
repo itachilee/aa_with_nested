@@ -63,3 +63,4 @@ gem 'devise'
 gem 'activeadmin_addons', '~> 1.7', '>= 1.7.1'
 
 gem 'cancan', '~> 1.6', '>= 1.6.10'
+gem 'faker', '~> 2.11'
