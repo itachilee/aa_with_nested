@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  gprs_no: MyString
+  water_no: MyString
+  meter_no: MyString
+  customer_no: MyString
+  customer_id: MyString
+
+two:
+  gprs_no: MyString
+  water_no: MyString
+  meter_no: MyString
+  customer_no: MyString
+  customer_id: MyString

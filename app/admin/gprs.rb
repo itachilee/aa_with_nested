@@ -4,7 +4,9 @@ ActiveAdmin.register Gpr do
 
   index do
     selectable_column
-    column :name
+    column :name, :sortable => :name do |resource|
+      editable_text_column resource, :name
+    end
     excluded = ["no"]
     (Gpr.column_names - excluded).each do |c|
       column c.to_sym
