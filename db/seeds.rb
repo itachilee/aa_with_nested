@@ -6,9 +6,19 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 # AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
-AdminUser.create!(
-    email: 'read@example.com',
-    password: 'password',
-    password_confirmation: 'password',
-    role: 'read'
-) if Rails.env.development?
+# AdminUser.create!(
+#     email: 'read@example.com',
+#     password: 'password',
+#     password_confirmation: 'password',
+#     role: 'read'
+# ) if Rails.env.development?
+
+# require 'faker'
+# 20.times do
+# Country.create!(name: Faker::Name.unique.name,location: Faker::Address.country)
+# end
+# @countries = Country.all
+# 20.times do
+#
+# end
+
