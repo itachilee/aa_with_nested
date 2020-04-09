@@ -13,12 +13,17 @@
 #     role: 'read'
 # ) if Rails.env.development?
 
-# require 'faker'
+require 'faker'
 # 20.times do
 # Country.create!(name: Faker::Name.unique.name,location: Faker::Address.country)
 # end
 # @countries = Country.all
-# 20.times do
-#
+# @countries.each do |c|
+#   Region.create!(name: Faker::FunnyName.two_word_name,country_id: c.id)
 # end
+
+@regions =Region.all
+@regions.pluck(:id).each do|c|
+  City.create!(name: Faker::Name.female_first_name,location: Faker::Address.country,region_id: c)
+end
 

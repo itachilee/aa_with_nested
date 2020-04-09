@@ -38,11 +38,14 @@ gem 'bootsnap', '>= 1.1.0', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'faker', '~> 2.11'
+  gem 'factory_bot_rails', '~> 5.1', '>= 5.1.1'
 end
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'
+
 end
 
 group :test do
@@ -63,6 +66,4 @@ gem 'devise'
 gem 'activeadmin_addons', '~> 1.7', '>= 1.7.1'
 
 gem 'cancan', '~> 1.6', '>= 1.6.10'
-gem 'faker', '~> 2.11'
 gem "audited", "~> 4.9"
-gem 'factory_bot_rails', '~> 5.1', '>= 5.1.1'
