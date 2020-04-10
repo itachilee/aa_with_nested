@@ -1,13 +1,13 @@
 ActiveAdmin.register Gpr do
-  menu parent: 'device'
+  menu parent: '设备管理'
   permit_params :name, :no
 
   index do
     selectable_column
-    column :name, :sortable => :name do |resource|
-      editable_text_column resource, :name
+    column "id" do|t|
+      link_to t.id,admin_gpr_path(:id)
     end
-    excluded = ["no"]
+    excluded = ["id"]
     (Gpr.column_names - excluded).each do |c|
       column c.to_sym
     end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_09_121825) do
+ActiveRecord::Schema.define(version: 2020_04_10_141505) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,6 +77,18 @@ ActiveRecord::Schema.define(version: 2020_04_09_121825) do
     t.index ["user_id", "user_type"], name: "user_index"
   end
 
+  create_table "charge_logs", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "charges", force: :cascade do |t|
+    t.string "name"
+    t.string "unit"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "cities", force: :cascade do |t|
     t.string "name"
     t.string "location"
@@ -102,6 +114,13 @@ ActiveRecord::Schema.define(version: 2020_04_09_121825) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "customer_currencies", force: :cascade do |t|
+    t.bigint "customer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_customer_currencies_on_customer_id"
+  end
+
   create_table "customers", force: :cascade do |t|
     t.string "name"
     t.string "identityId"
@@ -111,7 +130,15 @@ ActiveRecord::Schema.define(version: 2020_04_09_121825) do
     t.bigint "meter_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "charge_id"
+    t.index ["charge_id"], name: "index_customers_on_charge_id"
     t.index ["meter_id"], name: "index_customers_on_meter_id"
+  end
+
+  create_table "factories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "gprs", force: :cascade do |t|
@@ -127,6 +154,8 @@ ActiveRecord::Schema.define(version: 2020_04_09_121825) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "gpr_id"
+    t.integer "factory_id"
+    t.index ["factory_id"], name: "index_meters_on_factory_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -137,6 +166,7 @@ ActiveRecord::Schema.define(version: 2020_04_09_121825) do
     t.string "customer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "cmdcode"
   end
 
   create_table "pages", force: :cascade do |t|
@@ -189,6 +219,7 @@ ActiveRecord::Schema.define(version: 2020_04_09_121825) do
   add_foreign_key "answers", "questions"
   add_foreign_key "cities", "regions"
   add_foreign_key "collectors", "gprs"
+  add_foreign_key "customer_currencies", "customers"
   add_foreign_key "customers", "meters"
   add_foreign_key "regions", "countries"
   add_foreign_key "waters", "meters"

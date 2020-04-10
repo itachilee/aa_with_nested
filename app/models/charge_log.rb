@@ -1,0 +1,2 @@
+class ChargeLog < ApplicationRecord
+end

@@ -22,8 +22,15 @@ require 'faker'
 #   Region.create!(name: Faker::FunnyName.two_word_name,country_id: c.id)
 # end
 
-@regions =Region.all
-@regions.pluck(:id).each do|c|
-  City.create!(name: Faker::Name.female_first_name,location: Faker::Address.country,region_id: c)
-end
+# @regions =Region.all
+# @regions.pluck(:id).each do|c|
+#   City.create!(name: Faker::Name.female_first_name,location: Faker::Address.country,region_id: c)
+# end
 
+# 20.times do
+#   Factory.create!(name: Faker::Company.name)
+# end
+
+20.times do
+  Gpr.create!(name: Faker::Company.name,no: Faker::IDNumber.brazilian_id)
+end

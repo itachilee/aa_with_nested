@@ -11,7 +11,7 @@ ActiveAdmin.register Answer do
   form do |f|
     # f.inputs "form"
     # f.input :content
-    f.input :question_id, as: :nested_select,
+    f.inputs :question_id, as: :nested_select,
             level_1: {attribute: :survey_id},
             level_2: {attribute: :question_id}
             # level_3: {attribute: :id}
