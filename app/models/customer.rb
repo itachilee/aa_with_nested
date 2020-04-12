@@ -3,7 +3,6 @@ class Customer < ApplicationRecord
 
   def save_order?(type)
     # self.id
-
     @order = Order.new
     if 'open' == type
       @order.cmdcode = 186

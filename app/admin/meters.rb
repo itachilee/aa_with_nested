@@ -28,7 +28,11 @@ ActiveAdmin.register Meter do
     column :factory do|t|
       link_to t.factory.name,admin_factory_path(t.id) if t.factory_id.present?
     end
-    actions
+    actions do |organization|
+
+      (link_to '添加阀控器', add_meter_admin_meter_path(organization), method: :post) + "  " +
+          (link_to '删除阀控器', delete_meter_admin_meter_path(organization), method: :post)
+    end
   end
   form do|f|
     f.inputs "基本信息" do
@@ -47,6 +51,25 @@ ActiveAdmin.register Meter do
     f.actions
   end
 
-
+  member_action :add_meter, method: :post do
+    meter = Meter.find params[:id]
+    if meter.generate_order?("add")
+      flash[:notice] = "generate add meter order success"
+      redirect_to admin_orders_path
+    else
+      flash[:warning] = "hav't generate meter order "
+      redirect_to admin_customer_path
+    end
+  end
+  member_action :delete_meter, method: :post do
+    meter = Meter.find params[:id]
+    if meter.generate_order?("delete")
+      flash[:notice] = "generate delete meter order success"
+      redirect_to admin_orders_path
+    else
+      flash[:warning] = "hav't generate meter order yet "
+      redirect_to admin_customer_path
+    end
+  end
 
 end

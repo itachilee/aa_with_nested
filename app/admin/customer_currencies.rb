@@ -10,5 +10,9 @@ ActiveAdmin.register CustomerCurrency do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
-  
+  index do
+      Customer.column_names.each do|c|
+        column :c.to_sym
+      end
+  end
 end
