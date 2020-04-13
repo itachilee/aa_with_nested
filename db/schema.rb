@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_10_141505) do
+ActiveRecord::Schema.define(version: 2020_04_13_073539) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -177,6 +177,19 @@ ActiveRecord::Schema.define(version: 2020_04_10_141505) do
     t.datetime "updated_at", null: false
     t.integer "ancestry_depth", default: 0
     t.index ["ancestry"], name: "index_pages_on_ancestry"
+  end
+
+  create_table "plans", force: :cascade do |t|
+    t.string "plan_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "plans_cities", force: :cascade do |t|
+    t.bigint "city_id"
+    t.bigint "plan_id"
+    t.index ["city_id"], name: "index_plans_cities_on_city_id"
+    t.index ["plan_id"], name: "index_plans_cities_on_plan_id"
   end
 
   create_table "questions", force: :cascade do |t|

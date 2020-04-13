@@ -15,6 +15,32 @@ ActiveAdmin.register Gpr do
     column "collector" do|t|
       t.collectors.map{|c| link_to c.no,admin_collector_path(c.id)}
     end
-    actions
+    actions  do |organization|
+
+      (link_to '群开', group_open_admin_gpr_path(organization), method: :post) + "  " +
+          (link_to '群关', group_close_admin_gpr_path(organization), method: :post,class: 'lextest')
+    end
+  end
+
+
+  member_action :group_open, method: :post do
+    grp = Gpr.find params[:id]
+    if grp.group_operation?("close")
+      flash[:notice] = "generate open meter order success"
+      redirect_to admin_orders_path
+    else
+      flash[:warning] = "hav't generate meter order "
+      redirect_to admin_customer_path
+    end
+  end
+  member_action :group_close, method: :post do
+    grp = Gpr.find params[:id]
+    if grp.group_operation?("open")
+      flash[:notice] = "generate close meter order success"
+      redirect_to admin_orders_path
+    else
+      flash[:warning] = "hav't generate meter order yet "
+      redirect_to admin_customer_path
+    end
   end
 end

@@ -31,6 +31,10 @@ require 'faker'
 #   Factory.create!(name: Faker::Company.name)
 # end
 
-20.times do
-  Gpr.create!(name: Faker::Company.name,no: Faker::IDNumber.brazilian_id)
+# 20.times do
+#   Gpr.create!(name: Faker::Company.name,no: Faker::IDNumber.brazilian_id)
+# end
+
+5.times do
+  Plan.create!(plan_name: Faker::FunnyName.name)
 end
