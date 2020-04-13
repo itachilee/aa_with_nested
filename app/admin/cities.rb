@@ -14,7 +14,6 @@ ActiveAdmin.register City do
     f.inputs :location
     f.inputs "计划" do
       f.input :plan_ids, as: :tags, collection: Plan.all, display_name: :plan_name
-
     end
     # f.inputs :region_id,as: :select,collection: Region.all.map { |r| [r.name,r.id]  }
 

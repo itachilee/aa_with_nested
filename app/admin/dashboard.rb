@@ -1,32 +1,23 @@
 ActiveAdmin.register_page "Dashboard" do
-  menu priority: 1, label: proc { I18n.t("active_admin.dashboard") }
-
+  menu parent: '设备管理'
   content title: proc { I18n.t("active_admin.dashboard") } do
-    div class: "blank_slate_container", id: "dashboard_default_message" do
-      span class: "blank_slate" do
-        span I18n.t("active_admin.dashboard_welcome.welcome")
-        small I18n.t("active_admin.dashboard_welcome.call_to_action")
-      end
+    div class: "blank_slate_container", id: " dashboard_default_message" ,style: 'width:400;height:400;' do
+      para   geo_chart City.group(:name).count
+
     end
-
-    # Here is an example of a simple dashboard with columns and panels.
-    #
-    # columns do
-    #   column do
-    #     panel "Recent Posts" do
-    #       ul do
-    #         Post.recent(5).map do |post|
-    #           li link_to(post.title, admin_post_path(post))
-    #         end
-    #       end
-    #     end
-    #   end
-
-    #   column do
-    #     panel "Info" do
-    #       para "Welcome to ActiveAdmin."
-    #     end
-    #   end
-    # end
+    div do
+      para  column_chart Gpr.group_by_day(:created_at, format: "%a").count,download: {filename: "boom.png"}
+    end
+    div do
+      para  column_chart Order.group_by_day(:created_at, format: "%a").count
+    end
   end # content
+
+  def api_authentication
+    api_key = request.headers['Api-Key']
+    @app = Application.find_by_api_key(api_key) if api_key
+    unless @app
+      return render json: { errors: { message: 'Something went wrong, contact admin', code: '1000' } }
+    end
+  end
 end

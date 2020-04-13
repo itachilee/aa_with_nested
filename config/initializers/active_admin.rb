@@ -326,4 +326,5 @@ ActiveAdmin.setup do |config|
   #
   # config.order_clause = MyOrderClause
   config.authorization_adapter = ActiveAdmin::CanCanAdapter
+  # config.register_javascript 'chartkick.js'
 end
